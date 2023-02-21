@@ -22,12 +22,8 @@
     <string name="choix_du_projet">Choix du projet</string>
     <string name="choix_du_projet2">Choix du projet</string>
 
-    <!-- Strings used for the choice of the meeting room -->
-
-    <string-array name="projects_list">
-        <item>Projet Tartampion</item>
-        <item>Projet Lucidia</item>
-        <item>Projet Circus</item>
-    </string-array>
+    <string name="tartampion_project">Projet Tartampion</string>
+    <string name="lucidia_project">Projet Lucidia</string>
+    <string name="circus_project">Projet Circus</string>
 
 </resources>

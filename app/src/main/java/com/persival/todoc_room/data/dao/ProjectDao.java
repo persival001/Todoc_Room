@@ -1,4 +1,4 @@
-package com.persival.todoc_room.database.dao;
+package com.persival.todoc_room.data.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.persival.todoc_room.model.Project;
+import com.persival.todoc_room.data.entity.Project;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ public interface ProjectDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Project project);
 
-    @Query("DELETE FROM project_table")
+    @Query("DELETE FROM projects")
     void deleteAll();
 
-    @Query("SELECT * from project_table")
-    LiveData<List<Project>> loadProjectList();
+    @Query("SELECT * from projects")
+    LiveData<List<Project>> getProjectList();
 }

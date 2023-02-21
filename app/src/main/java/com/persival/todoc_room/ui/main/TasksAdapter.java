@@ -12,40 +12,37 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.persival.todoc_room.R;
-import com.persival.todoc_room.model.Project;
-import com.persival.todoc_room.model.Task;
+import com.persival.todoc_room.data.entity.Project;
+import com.persival.todoc_room.data.entity.Task;
+import com.persival.todoc_room.ui.DeleteTaskListener;
 
 import java.util.List;
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHolder> {
-    /**
-     * The listener for when a task needs to be deleted
-     */
     @NonNull
     private final DeleteTaskListener deleteTaskListener;
-    /**
-     * The list of tasks the adapter deals with
-     */
     @NonNull
-    private List<Task> tasks;
+    private List<Task> tasksList;
+    @NonNull
+    private List<Project> projectList;
 
-    /**
-     * Instantiates a new TasksAdapter.
-     *
-     * @param tasks the list of tasks the adapter deals with to set
-     */
-    public TasksAdapter(@NonNull final List<Task> tasks, @NonNull final DeleteTaskListener deleteTaskListener) {
-        this.tasks = tasks;
+    public TasksAdapter(@NonNull final List<Task> tasksList,
+                        @NonNull final DeleteTaskListener deleteTaskListener,
+                        @NonNull final List<Project> projectList
+    ) {
+        this.tasksList = tasksList;
         this.deleteTaskListener = deleteTaskListener;
+        this.projectList = projectList;
     }
 
-    /**
-     * Updates the list of tasks the adapter deals with.
-     *
-     * @param tasks the list of tasks the adapter deals with to set
-     */
-    public void updateTasks(@NonNull final List<Task> tasks) {
-        this.tasks = tasks;
+    public void updateProjects(@NonNull final List<Project> projectList) {
+        this.projectList = projectList;
+        notifyDataSetChanged();
+    }
+
+
+    public void updateTasks(@NonNull final List<Task> tasksList) {
+        this.tasksList = tasksList;
         notifyDataSetChanged();
     }
 
@@ -53,103 +50,46 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_task, viewGroup, false);
-        return new TaskViewHolder(view, deleteTaskListener);
+        return new TaskViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder taskViewHolder, int position) {
-        taskViewHolder.bind(tasks.get(position));
+        Task task = tasksList.get(position);
+        taskViewHolder.bind(task);
+        taskViewHolder.imgDelete.setOnClickListener(v -> deleteTaskListener.onDeleteTask(task.getId()));
     }
 
     @Override
     public int getItemCount() {
-        return tasks.size();
+        return tasksList.size();
     }
 
-    /**
-     * Listener for deleting tasks
-     */
-    public interface DeleteTaskListener {
-        /**
-         * Called when a task needs to be deleted.
-         *
-         * @param task the task that needs to be deleted
-         */
-        void onDeleteTask(Task task);
-    }
 
-    /**
-     * <p>ViewHolder for task items in the tasks list</p>
-     *
-     * @author Gaëtan HERFRAY
-     */
     class TaskViewHolder extends RecyclerView.ViewHolder {
-        /**
-         * The circle icon showing the color of the project
-         */
+
         private final AppCompatImageView imgProject;
-
-        /**
-         * The TextView displaying the name of the task
-         */
         private final TextView lblTaskName;
-
-        /**
-         * The TextView displaying the name of the project
-         */
         private final TextView lblProjectName;
-
-        /**
-         * The delete icon
-         */
         private final AppCompatImageView imgDelete;
 
-        /**
-         * The listener for when a task needs to be deleted
-         */
-        private final DeleteTaskListener deleteTaskListener;
-
-        /**
-         * Instantiates a new TaskViewHolder.
-         *
-         * @param itemView           the view of the task item
-         * @param deleteTaskListener the listener for when a task needs to be deleted to set
-         */
-        TaskViewHolder(@NonNull View itemView, @NonNull DeleteTaskListener deleteTaskListener) {
+        TaskViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            this.deleteTaskListener = deleteTaskListener;
 
             imgProject = itemView.findViewById(R.id.img_project);
             lblTaskName = itemView.findViewById(R.id.lbl_task_name);
             lblProjectName = itemView.findViewById(R.id.lbl_project_name);
             imgDelete = itemView.findViewById(R.id.img_delete);
-
-            imgDelete.setOnClickListener(view -> {
-                final Object tag = view.getTag();
-                if (tag instanceof Task) {
-                    TaskViewHolder.this.deleteTaskListener.onDeleteTask((Task) tag);
-                }
-            });
         }
 
-        /**
-         * Binds a task to the item view.
-         *
-         * @param task the task to bind in the item view
-         */
         @SuppressLint("RestrictedApi")
         void bind(Task task) {
             lblTaskName.setText(task.getName());
-            imgDelete.setTag(task);
-
-            final Project taskProject = task.getProject();
-            if (taskProject != null) {
-                imgProject.setSupportImageTintList(ColorStateList.valueOf(taskProject.getColor()));
-                lblProjectName.setText(taskProject.getName());
-            } else {
-                imgProject.setVisibility(View.INVISIBLE);
-                lblProjectName.setText("");
+            for (Project project : projectList) {
+                if (project.getId() == task.getProjectId()) {
+                    imgProject.setSupportImageTintList(ColorStateList.valueOf(project.getColor()));
+                    lblProjectName.setText(project.getName());
+                }
             }
 
         }
