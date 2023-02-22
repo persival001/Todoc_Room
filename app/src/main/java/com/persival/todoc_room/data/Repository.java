@@ -43,22 +43,22 @@ public class Repository {
     }
 
     @NonNull
-    public LiveData<List<Task>> filteredAllEntriesSortedAZ() {
+    public LiveData<List<Task>> getTasksSortedByNameASC() {
         return taskDao.getAllEntriesSortedAZ();
     }
 
     @NonNull
-    public LiveData<List<Task>> filteredAllEntriesSortedZA() {
+    public LiveData<List<Task>> getTasksSortedByNameDESC() {
         return taskDao.getAllEntriesSortedZA();
     }
 
     @NonNull
-    public LiveData<List<Task>> filteredAllEntriesSortedOlderFirst() {
+    public LiveData<List<Task>> getTasksSortedByTimeASC() {
         return taskDao.getAllEntriesSortedByTimeASC();
     }
 
     @NonNull
-    public LiveData<List<Task>> filteredAllEntriesSortedRecentFirst() {
+    public LiveData<List<Task>> getTasksSortedByTimeDESC() {
         return taskDao.getAllEntriesSortedByTimeDESC();
     }
 }

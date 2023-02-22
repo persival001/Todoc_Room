@@ -15,8 +15,6 @@ import java.util.Objects;
     ))
 public class Task {
 
-
-
     @PrimaryKey(autoGenerate = true)
     private long id;
     private long projectId;

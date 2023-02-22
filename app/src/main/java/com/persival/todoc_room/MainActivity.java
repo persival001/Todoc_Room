@@ -80,22 +80,25 @@ public class MainActivity extends AppCompatActivity implements DeleteTaskListene
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.filter_alphabetical) {
-            // mainViewModel.filteredListOfTask("AtoZ");
+            mainViewModel.setFilter("AtoZ");
+            updateTasks();
             return true;
         }
         if (id == R.id.filter_alphabetical_inverted) {
-            // mainViewModel.filteredListOfTask("ZtoA");
+            mainViewModel.setFilter("ZtoA");
+            updateTasks();
             return true;
         }
         if (id == R.id.filter_oldest_first) {
-            // mainViewModel.filteredListOfTask("OlderFirst");
+            mainViewModel.setFilter("OlderFirst");
+            updateTasks();
             return true;
         }
         if (id == R.id.filter_recent_first) {
-            // mainViewModel.filteredListOfTask("RecentFirst");
+            mainViewModel.setFilter("RecentFirst");
+            updateTasks();
             return true;
         }
-        updateTasks();
         return super.onOptionsItemSelected(item);
     }
 
@@ -123,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements DeleteTaskListene
         } else {
             binding.lblNoTask.setVisibility(View.GONE);
             binding.listTasks.setVisibility(View.VISIBLE);
-            // mainViewModel.filteredListOfTask("ZtoA");
             tasksAdapter.updateTasks(tasksList);
         }
     }

@@ -18,9 +18,6 @@ public interface TaskDao {
     @Query("DELETE FROM tasks WHERE id = :taskId")
     void deleteTask(long taskId);
 
-    @Query("SELECT * FROM tasks WHERE projectId = :projectId")
-    LiveData<List<Task>> getTasksByProjectId(int projectId);
-
     @Query("SELECT * FROM tasks")
     LiveData<List<Task>> getTaskList();
 

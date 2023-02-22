@@ -25,8 +25,6 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         if (factory == null) {
             factory = new ViewModelFactory(context);
         }
-
-
         return factory;
     }
 
@@ -39,7 +37,6 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(AddTaskViewModel.class)) {
             return (T) new AddTaskViewModel(repository);
         }
-
         throw new IllegalArgumentException("Unknown ViewModel");
     }
 }

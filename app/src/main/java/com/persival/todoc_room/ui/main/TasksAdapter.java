@@ -40,7 +40,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
         notifyDataSetChanged();
     }
 
-
     public void updateTasks(@NonNull final List<Task> tasksList) {
         this.tasksList = tasksList;
         notifyDataSetChanged();
@@ -64,7 +63,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
     public int getItemCount() {
         return tasksList.size();
     }
-
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
 
