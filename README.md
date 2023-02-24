@@ -3,7 +3,7 @@
 ToDoc is an application that allows you to manage meetings in the form of a list.
 
 
-## Feature List
+### Feature List
 
 ● List the tasks for each of the current projects:
 
@@ -23,7 +23,7 @@ For the moment, only 3 projects are managed: “Project Tartampion”, “Projec
 ● Sort tasks, by project name OR by creation date.
 
 
-## Further information
+### Further information
 
 ● Responsive application on all sizes of Android phones and tablets in portrait and landscape modes.
 
@@ -78,16 +78,18 @@ This view does not reflect the actual file hierarchy on disk, but is organized b
 
 Some of the structural changes compared to the structure on disk include the following:
 
+```
 1 - Shows all the project's build-related configuration files in a top-level Gradle Script group.
 
 2 - Shows all manifest files for each module in a module-level group(when you have different manifest files for different product flavors and build types).
 
 3 - Shows all alternative resource files in a single group, instead of in separate folders per resource qualifier. For example, all density versions of your launcher icon are visible side-by-side.
-
+```
 
 
 Within each Android app module, files are shown in the following groups:
 
+```
 1 - manifests: Contains the AndroidManifest.xml file.
 
 2 - java: Contains the Java source code files, separated by package names, including JUnit test code.
@@ -96,3 +98,4 @@ Within each Android app module, files are shown in the following groups:
 For more information about all possible resource types, see Providing Resources.
 
 4 - Gradle Scripts: Two types of Gradle file are used in android projects One type is Project level Gradle which contains application repositories, dependencies, and project-level variables, Second type are modules level Gradle which contain app version name, version code, min version, application ID, dependencies for this module, debug and release build types, build flavors, etc
+```
