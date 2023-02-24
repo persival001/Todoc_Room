@@ -1,6 +1,6 @@
 package com.persival.todoc_room.data;
 
-import android.content.Context;
+import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -13,6 +13,7 @@ import com.persival.todoc_room.data.dao.TaskDao;
 import com.persival.todoc_room.data.entity.Project;
 import com.persival.todoc_room.data.entity.Task;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -41,11 +42,11 @@ public abstract class TodocDatabase extends RoomDatabase {
         }
     };
 
-    public static TodocDatabase getDatabase(final Context context) {
+    public static TodocDatabase getDatabase(final Application application, final Executor executor) {
         if (sInstance == null) {
             synchronized (TodocDatabase.class) {
                 if (sInstance == null) {
-                    sInstance = Room.databaseBuilder(context.getApplicationContext(),
+                    sInstance = Room.databaseBuilder(application,
                             TodocDatabase.class, "task_database").addCallback(sRoomDatabaseCallback)
                         .build();
                 }

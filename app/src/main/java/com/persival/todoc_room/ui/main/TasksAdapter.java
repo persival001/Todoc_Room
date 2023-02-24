@@ -20,19 +20,19 @@ import java.util.List;
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHolder> {
     @NonNull
-    private final DeleteTaskListener deleteTaskListener;
-    @NonNull
     private List<Task> tasksList;
     @NonNull
     private List<Project> projectList;
+    @NonNull
+    private final DeleteTaskListener deleteTaskListener;
 
     public TasksAdapter(@NonNull final List<Task> tasksList,
-                        @NonNull final DeleteTaskListener deleteTaskListener,
-                        @NonNull final List<Project> projectList
+                        @NonNull final List<Project> projectList,
+                        @NonNull final DeleteTaskListener deleteTaskListener
     ) {
         this.tasksList = tasksList;
-        this.deleteTaskListener = deleteTaskListener;
         this.projectList = projectList;
+        this.deleteTaskListener = deleteTaskListener;
     }
 
     public void updateProjects(@NonNull final List<Project> projectList) {

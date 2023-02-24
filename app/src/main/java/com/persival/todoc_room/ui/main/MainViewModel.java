@@ -12,17 +12,15 @@ import com.persival.todoc_room.data.entity.Task;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
+    public final MutableLiveData<String> filterLiveData = new MutableLiveData<>("OlderFirst");
     private final Repository repository;
-    private final LiveData<List<Project>> projectsList;
-    private final MutableLiveData<String> filterLiveData = new MutableLiveData<>("OlderFirst");
 
     public MainViewModel(Repository repository) {
         this.repository = repository;
-        projectsList = this.repository.getProjectsList();
     }
 
     public LiveData<List<Project>> getProjectsList() {
-        return projectsList;
+        return repository.getProjectsList();
     }
 
     public void deleteTask(long taskId) {

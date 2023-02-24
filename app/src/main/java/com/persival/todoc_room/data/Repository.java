@@ -9,16 +9,19 @@ import com.persival.todoc_room.data.entity.Project;
 import com.persival.todoc_room.data.entity.Task;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 public class Repository {
     @NonNull
     private final TaskDao taskDao;
     @NonNull
     private final ProjectDao projectDao;
+    private final Executor executor;
 
-    public Repository(@NonNull TaskDao taskDao, @NonNull ProjectDao projectDao) {
+    public Repository(@NonNull TaskDao taskDao, @NonNull ProjectDao projectDao, Executor executor) {
         this.taskDao = taskDao;
         this.projectDao = projectDao;
+        this.executor = executor;
     }
 
     @NonNull
@@ -32,13 +35,13 @@ public class Repository {
     }
 
     public void deleteTask(long taskId) {
-        TodocDatabase.databaseWriteExecutor.execute(() ->
+        executor.execute(() ->
             taskDao.deleteTask(taskId));
     }
 
     public void addNewTask(Project project, String name, long creationTimestamp) {
         Task task = new Task(0, project.getId(), name, creationTimestamp);
-        TodocDatabase.databaseWriteExecutor.execute(() ->
+        executor.execute(() ->
             taskDao.insertTask(task));
     }
 

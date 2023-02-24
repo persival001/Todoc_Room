@@ -1,4 +1,4 @@
-package com.persival.todoc_room;
+package com.persival.todoc_room.ui.main;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,13 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.persival.todoc_room.R;
 import com.persival.todoc_room.data.entity.Project;
 import com.persival.todoc_room.data.entity.Task;
 import com.persival.todoc_room.databinding.ActivityMainBinding;
 import com.persival.todoc_room.ui.DeleteTaskListener;
 import com.persival.todoc_room.ui.add.AddTaskDialogFragment;
-import com.persival.todoc_room.ui.main.MainViewModel;
-import com.persival.todoc_room.ui.main.TasksAdapter;
 import com.persival.todoc_room.utils.ViewModelFactory;
 
 import java.util.ArrayList;
@@ -26,11 +25,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements DeleteTaskListener {
     private ActivityMainBinding binding;
     private MainViewModel mainViewModel;
+    private TasksAdapter tasksAdapter;
     @NonNull
     private List<Task> tasksList = new ArrayList<>();
     @NonNull
     private List<Project> projectList = new ArrayList<>();
-    private TasksAdapter tasksAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,11 +37,12 @@ public class MainActivity extends AppCompatActivity implements DeleteTaskListene
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         mainViewModel = new ViewModelProvider(
             this, ViewModelFactory.getInstance(
-            getApplication())).get(MainViewModel.class);
+        )).get(MainViewModel.class);
 
-        tasksAdapter = new TasksAdapter(tasksList, this, projectList);
+        tasksAdapter = new TasksAdapter(tasksList, projectList, this);
 
         initBinding();
         initObserver();

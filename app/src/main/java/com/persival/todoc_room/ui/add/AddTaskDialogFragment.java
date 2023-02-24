@@ -31,7 +31,7 @@ public class AddTaskDialogFragment extends DialogFragment {
 
         addTaskViewModel = new ViewModelProvider(
             this, ViewModelFactory.getInstance(
-            getContext())).get(AddTaskViewModel.class);
+        )).get(AddTaskViewModel.class);
 
         initAutoCompletionSpinner();
 

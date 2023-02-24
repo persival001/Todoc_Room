@@ -9,18 +9,20 @@ X
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
 A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
-<
-build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 >
 app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
-F
-app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
 I
 app/sampledata/tasks.json,4/4/44987ae2ab8ecac6d3ba9d448ad06fc5c54a9df3
-P
- app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
-}
-Mapp/src/androidTest/java/com/persival/todoc_room/ExampleInstrumentedTest.java,0/c/0cbba0b0bf53cbe68003aa2f4d7255deddf6b636
+F
+app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
+r
+Bapp/src/main/java/com/persival/todoc_room/data/dao/ProjectDao.java,4/3/43aff3818e9aba81719cc95c1dd50de76590d329
+o
+?app/src/main/java/com/persival/todoc_room/data/dao/TaskDao.java,e/e/ee5b481f3e71ddf2857211be9983cdd90ce84b19
+r
+Bapp/src/main/java/com/persival/todoc_room/data/entity/Project.java,0/0/00f973de1f3ea2a72cd6c7c7cb2ac52d7f8ea21d
+o
+?app/src/main/java/com/persival/todoc_room/data/entity/Task.java,b/a/ba0f302a079340cdcd1dbfcf5ca9a3d431f94d39

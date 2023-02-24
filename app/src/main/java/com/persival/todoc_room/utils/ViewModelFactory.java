@@ -1,31 +1,32 @@
 package com.persival.todoc_room.utils;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.persival.todoc_room.MainApplication;
 import com.persival.todoc_room.data.Repository;
 import com.persival.todoc_room.data.TodocDatabase;
 import com.persival.todoc_room.ui.add.AddTaskViewModel;
 import com.persival.todoc_room.ui.main.MainViewModel;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
-    private static ViewModelFactory factory;
+    private static final int THREADS = Runtime.getRuntime().availableProcessors();
+    private static final Executor EXECUTOR = Executors.newFixedThreadPool(THREADS);
+    private static final ViewModelFactory FACTORY = new ViewModelFactory();
     private final Repository repository;
 
-    public ViewModelFactory(Context context) {
-        TodocDatabase db = TodocDatabase.getDatabase(context);
-        this.repository = new Repository(db.taskDao(), db.projectDao());
+    public ViewModelFactory() {
+        TodocDatabase db = TodocDatabase.getDatabase(MainApplication.getApplication(), EXECUTOR);
+        this.repository = new Repository(db.taskDao(), db.projectDao(), EXECUTOR);
     }
 
-    public static ViewModelFactory getInstance(Context context) {
-        if (factory == null) {
-            factory = new ViewModelFactory(context);
-        }
-        return factory;
+    public static ViewModelFactory getInstance() {
+        return FACTORY;
     }
 
     @SuppressWarnings("unchecked")
