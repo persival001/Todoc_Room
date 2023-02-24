@@ -42,6 +42,13 @@ public abstract class TodocDatabase extends RoomDatabase {
         }
     };
 
+    /**
+     * Gets database.
+     *
+     * @param application the application
+     * @param executor    the executor
+     * @return the database
+     */
     public static TodocDatabase getDatabase(final Application application, final Executor executor) {
         if (sInstance == null) {
             synchronized (TodocDatabase.class) {

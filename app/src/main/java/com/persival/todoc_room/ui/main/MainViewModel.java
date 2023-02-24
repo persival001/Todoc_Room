@@ -19,14 +19,29 @@ public class MainViewModel extends ViewModel {
         this.repository = repository;
     }
 
+    /**
+     * Gets projects list.
+     *
+     * @return the projects list
+     */
     public LiveData<List<Project>> getProjectsList() {
         return repository.getProjectsList();
     }
 
+    /**
+     * Delete task.
+     *
+     * @param taskId the task id
+     */
     public void deleteTask(long taskId) {
         repository.deleteTask(taskId);
     }
 
+    /**
+     * Gets tasks list.
+     *
+     * @return the tasks list
+     */
     public LiveData<List<Task>> getTasksList() {
         return Transformations.switchMap(filterLiveData, filter -> {
             if (filter == null) {
@@ -45,6 +60,10 @@ public class MainViewModel extends ViewModel {
         });
     }
 
+    /**
+     * Set a filter type for sort the list
+     *
+     */
     public void setFilter(String filter) {
         filterLiveData.setValue(filter);
     }

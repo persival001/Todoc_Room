@@ -17,10 +17,22 @@ public class AddTaskViewModel extends ViewModel {
         projectList = this.repository.getProjectsList();
     }
 
+    /**
+     * Gets project list.
+     *
+     * @return the project list
+     */
     public LiveData<List<Project>> getProjectList() {
         return projectList;
     }
 
+    /**
+     * Add new task.
+     *
+     * @param project           the project
+     * @param name              the name
+     * @param creationTimestamp the creation timestamp
+     */
     public void addNewTask(Project project, String name, long creationTimestamp) {
         repository.addNewTask(project, name, creationTimestamp);
     }

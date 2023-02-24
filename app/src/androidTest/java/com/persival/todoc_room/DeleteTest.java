@@ -6,9 +6,11 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
@@ -21,11 +23,13 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+import com.persival.todoc_room.R;
 import com.persival.todoc_room.ui.main.MainActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -77,7 +81,7 @@ public class DeleteTest {
                         0),
                     0),
                 isDisplayed()));
-        appCompatEditText.perform(replaceText("Laver"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("tache 1"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton = onView(
             allOf(withId(android.R.id.button1), withText("Ajouter"),
@@ -106,7 +110,7 @@ public class DeleteTest {
                         0),
                     0),
                 isDisplayed()));
-        appCompatEditText2.perform(replaceText("Ranger"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("tache 2"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton2 = onView(
             allOf(withId(android.R.id.button1), withText("Ajouter"),
@@ -117,6 +121,12 @@ public class DeleteTest {
                     3)));
         appCompatButton2.perform(scrollTo(), click());
 
+        ViewInteraction textView = onView(
+            allOf(withId(R.id.lbl_task_name), withText("tache 2"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.RelativeLayout.class))),
+                isDisplayed()));
+        textView.check(matches(withText("tache 2")));
+
         ViewInteraction appCompatImageView = onView(
             allOf(withId(R.id.img_delete),
                 childAtPosition(
@@ -126,6 +136,12 @@ public class DeleteTest {
                     1),
                 isDisplayed()));
         appCompatImageView.perform(click());
+
+        ViewInteraction textView2 = onView(
+            allOf(withId(R.id.lbl_task_name), withText("tache 1"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.RelativeLayout.class))),
+                isDisplayed()));
+        textView2.check(matches(withText("tache 1")));
 
         ViewInteraction appCompatImageView2 = onView(
             allOf(withId(R.id.img_delete),

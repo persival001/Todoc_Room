@@ -25,6 +25,11 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         this.repository = new Repository(db.taskDao(), db.projectDao(), EXECUTOR);
     }
 
+    /**
+     * Gets new instance of ViewModelFactory.
+     *
+     * @return the instance
+     */
     public static ViewModelFactory getInstance() {
         return FACTORY;
     }

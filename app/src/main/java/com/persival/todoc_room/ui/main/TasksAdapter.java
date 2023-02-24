@@ -35,11 +35,21 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
         this.deleteTaskListener = deleteTaskListener;
     }
 
+    /**
+     * Update projects.
+     *
+     * @param projectList the project list
+     */
     public void updateProjects(@NonNull final List<Project> projectList) {
         this.projectList = projectList;
         notifyDataSetChanged();
     }
 
+    /**
+     * Update tasks.
+     *
+     * @param tasksList the tasks list
+     */
     public void updateTasks(@NonNull final List<Task> tasksList) {
         this.tasksList = tasksList;
         notifyDataSetChanged();
@@ -80,6 +90,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             imgDelete = itemView.findViewById(R.id.img_delete);
         }
 
+        /**
+         * Bind text - task name, project color and project name
+         *
+         * @param task the task
+         */
         @SuppressLint("RestrictedApi")
         void bind(Task task) {
             lblTaskName.setText(task.getName());

@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements DeleteTaskListene
         initObserver();
     }
 
+    /**
+     * Init binding.
+     */
     public void initBinding() {
         binding.listTasks.setLayoutManager(new LinearLayoutManager(
             this, LinearLayoutManager.VERTICAL, false)
@@ -56,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements DeleteTaskListene
         binding.fabAddTask.setOnClickListener(view -> showAddTaskDialog());
     }
 
+    /**
+     * Init observer for list of projects and tasks.
+     */
     public void initObserver() {
         mainViewModel.getTasksList().observe(
             this, observedTaskList -> {
